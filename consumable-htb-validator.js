@@ -29,7 +29,19 @@ function partnerValidator(configs) {
                     '*': {
                         type: 'object',
                         properties: {
-                            placementId: {
+                            networkId: {
+                                type: 'string',
+                                minLength: 1
+                            },
+                            siteId: {
+                                type: 'string',
+                                minLength: 1
+                            },
+                            unitId: {
+                                type: 'string',
+                                minLength: 1
+                            },
+                            unitName: {
                                 type: 'string',
                                 minLength: 1
                             }
