@@ -44,6 +44,13 @@ function partnerValidator(configs) {
                             unitName: {
                                 type: 'string',
                                 minLength: 1
+                            },
+                            adTypes: {
+                                type: 'array',
+                                optional: true,
+                                items: {
+                                    type: 'number'
+                                }
                             }
                         }
                     }
