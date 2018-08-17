@@ -128,12 +128,7 @@ function ConsumableHtb(configs) {
          * }
          */
 
-        /* ---------------------- PUT CODE HERE ------------------------------------ */
-        var queryObj = {};
         var callbackId = System.generateUniqueId();
-
-        /* Change this to your bidder endpoint. */
-        var baseUrl = Browser.getProtocol() + '//someAdapterEndpoint.com/bid';
 
         /* ------------------------ Get consent information -------------------------
          * If you want to implement GDPR consent in your adapter, use the function
@@ -159,19 +154,37 @@ function ConsumableHtb(configs) {
          * returned from gdpr.getConsent() are safe defaults and no attempt has been
          * made by the wrapper to contact a Consent Management Platform.
          */
-        var gdprStatus = ComplianceService.gdpr.getConsent();
+        //var gdprStatus = ComplianceService.gdpr.getConsent();
         var privacyEnabled = ComplianceService.isPrivacyEnabled();
 
-        /* ---------------- Craft bid request using the above returnParcels --------- */
-
-        /* ------- Put GDPR consent code here if you are implementing GDPR ---------- */
-
-        /* -------------------------------------------------------------------------- */
-
         return {
-            url: baseUrl,
-            data: queryObj,
-            callbackId: callbackId
+            url: Browser.getProtocol() + '//e.serverbid.com/api/v2',
+            data: {
+                placements: returnParcels.map(function (parcel) {
+                    return {
+                        networkId: parcel.xSlotRef.networkId,
+                        siteId: parcel.xSlotRef.siteId,
+                        unitId: parcel.xSlotRef.unitId,
+                        unitName: parcel.xSlotRef.unitName,
+                        divName: parcel.htSlot.id,
+                        adTypes: parcel.xSlotRef.adTypes
+                    };
+                }),
+                time: System.now(),
+                user: {},
+                url: Browser.getPageUrl(),
+                referrer: document.referrer,
+                enableBotFiltering: true,
+                includePricingData: true,
+                parallel: true,
+                networkId: returnParcels[0].networkId,
+                siteId: returnParcels[0].siteId
+            },
+            callbackId: callbackId,
+            networkParamOverrides: {
+                method: 'POST',
+                contentType: 'application/json'
+            }
         };
     }
 
