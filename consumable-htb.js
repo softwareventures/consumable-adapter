@@ -166,7 +166,7 @@ function ConsumableHtb(configs) {
                         siteId: parcel.xSlotRef.siteId,
                         unitId: parcel.xSlotRef.unitId,
                         unitName: parcel.xSlotRef.unitName,
-                        divName: parcel.htSlot.id,
+                        divName: parcel.requestId,
                         adTypes: parcel.xSlotRef.adTypes
                     };
                 }),
@@ -243,12 +243,6 @@ function ConsumableHtb(configs) {
          *
          */
 
-        /* ---------- Process adResponse and extract the bids into the bids array ------------ */
-
-        var bids = adResponse;
-
-        /* --------------------------------------------------------------------------------- */
-
         for (var j = 0; j < returnParcels.length; j++) {
             var curReturnParcel = returnParcels[j];
 
@@ -257,27 +251,11 @@ function ConsumableHtb(configs) {
             headerStatsInfo[htSlotId] = {};
             headerStatsInfo[htSlotId][curReturnParcel.requestId] = [curReturnParcel.xSlotName];
 
-            var curBid;
+            var requestId = curReturnParcel.requestId;
+            var decision = adResponse.decisions && adResponse.decisions[requestId];
 
-            for (var i = 0; i < bids.length; i++) {
-                /**
-                 * This section maps internal returnParcels and demand returned from the bid request.
-                 * In order to match them correctly, they must be matched via some criteria. This
-                 * is usually some sort of placements or inventory codes. Please replace the someCriteria
-                 * key to a key that represents the placement in the configuration and in the bid responses.
-                 */
-
-                /* ----------- Fill this out to find a matching bid for the current parcel ------------- */
-                if (curReturnParcel.xSlotRef.someCriteria === bids[i].someCriteria) {
-                    curBid = bids[i];
-                    bids.splice(i, 1);
-
-                    break;
-                }
-            }
-
-            /* No matching bid found so its a pass */
-            if (!curBid) {
+            if (!decision) {
+                /* No matching bid found so its a pass */
                 if (__profile.enabledAnalytics.requestTime) {
                     __baseClass._emitStatsEvent(sessionId, 'hs_slot_pass', headerStatsInfo);
                 }
@@ -286,37 +264,31 @@ function ConsumableHtb(configs) {
                 continue;
             }
 
-            /* ---------- Fill the bid variables with data from the bid response here. ------------ */
-
-            /* Using the above variable, curBid, extract various information about the bid and assign it to
-             * these local variables */
-
             /* The bid price for the given slot */
-            var bidPrice = curBid.price;
+            var bidPrice = decision.pricing && Number(decision.pricing.clearPrice);
 
             /* The size of the given slot */
-            var bidSize = [Number(curBid.width), Number(curBid.height)];
+            var bidSize = [Number(decision.width), Number(decision.height)];
 
             /* The creative/adm for the given slot that will be rendered if is the winner.
              * Please make sure the URL is decoded and ready to be document.written.
              */
-            var bidCreative = curBid.adm;
+            var bidCreative = decision.contents && decision.contents[0] && decision.contents[0].body;
 
             /* The dealId if applicable for this slot. */
-            var bidDealId = curBid.dealid;
+            var bidDealId = '';
 
             /* Explicitly pass */
-            var bidIsPass = bidPrice <= 0;
+            var bidIsPass = bidPrice <= 0 || !bidCreative;
 
             /* OPTIONAL: tracking pixel url to be fired AFTER rendering a winning creative.
             * If firing a tracking pixel is not required or the pixel url is part of the adm,
             * leave empty;
             */
-            var pixelUrl = '';
+            var pixelUrl = decision.impressionUrl || '';
 
             /* --------------------------------------------------------------------------------------- */
 
-            curBid = null;
             if (bidIsPass) {
                 //? if (DEBUG) {
                 Scribe.info(__profile.partnerId + ' returned pass for { id: ' + adResponse.id + ' }.');
