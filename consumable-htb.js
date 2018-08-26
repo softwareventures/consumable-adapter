@@ -164,8 +164,6 @@ function ConsumableHtb(configs) {
                     return {
                         networkId: parcel.xSlotRef.networkId,
                         siteId: parcel.xSlotRef.siteId,
-                        unitId: parcel.xSlotRef.unitId,
-                        unitName: parcel.xSlotRef.unitName,
                         divName: parcel.requestId,
                         adTypes: parcel.xSlotRef.adTypes
                     };
