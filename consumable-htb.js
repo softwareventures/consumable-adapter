@@ -164,7 +164,7 @@ function ConsumableHtb(configs) {
                     return {
                         networkId: parcel.xSlotRef.networkId,
                         siteId: parcel.xSlotRef.siteId,
-                        divName: parcel.requestId,
+                        divName: parcel.xSlotName,
                         adTypes: parcel.xSlotRef.adTypes
                     };
                 }),
@@ -247,8 +247,7 @@ function ConsumableHtb(configs) {
             headerStatsInfo[htSlotId] = {};
             headerStatsInfo[htSlotId][curReturnParcel.requestId] = [curReturnParcel.xSlotName];
 
-            var requestId = curReturnParcel.requestId;
-            var decision = adResponse.decisions && adResponse.decisions[requestId];
+            var decision = adResponse.decisions && adResponse.decisions[curReturnParcel.xSlotName];
 
             if (!decision) {
                 /* No matching bid found so its a pass */
