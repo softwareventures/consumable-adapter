@@ -176,9 +176,7 @@ function ConsumableHtb(configs) {
                 referrer: document.referrer,
                 enableBotFiltering: true,
                 includePricingData: true,
-                parallel: true,
-                networkId: returnParcels[0].networkId,
-                siteId: returnParcels[0].siteId
+                parallel: true
             },
             callbackId: callbackId,
             networkParamOverrides: {
