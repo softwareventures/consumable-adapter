@@ -284,7 +284,7 @@ function ConsumableHtb(configs) {
             var bidDealId = '';
 
             /* Explicitly pass */
-            var bidIsPass = bidPrice <= 0 || !bidCreative;
+            var bidIsPass = bidPrice <= 0;
 
             /* OPTIONAL: tracking pixel url to be fired AFTER rendering a winning creative.
             * If firing a tracking pixel is not required or the pixel url is part of the adm,
