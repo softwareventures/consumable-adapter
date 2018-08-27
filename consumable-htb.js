@@ -261,7 +261,7 @@ function ConsumableHtb(configs) {
 
             /* The bid price for the given slot */
             var bidPrice = decision.pricing && Number(decision.pricing.clearPrice)
-                * parseFloat(curReturnParcel.networkId) / parseFloat(curReturnParcel.groupId);
+                * parseFloat(curReturnParcel.xSlotRef.networkId) / parseFloat(curReturnParcel.xSlotRef.groupId);
 
             /* The size of the given slot */
             var bidSize = [Number(decision.width), Number(decision.height)];
@@ -272,12 +272,12 @@ function ConsumableHtb(configs) {
             var wrappedCreative = decision.contents && decision.contents[0] && decision.contents[0].body || "";
             var cb = System.now();
             var bidCreative = '<script>'
-                + 'document.write(\'<div id=\"' + curReturnParcel.unitName + '-' + curReturnParcel.unitId + '\">\');</script>'
+                + 'document.write(\'<div id=\"' + curReturnParcel.xSlotRef.unitName + '-' + curReturnParcel.xSlotRef.unitId + '\">\');</script>'
                 + wrappedCreative
                 + '<script>document.write(\'</div>\');</script>'
-                + '<script>document.write(\'<div class="' + curReturnParcel.unitName + '"></div>\');</script>'
-                + '<script>document.write(\'<script src="https://yummy.consumable.com/' + curReturnParcel.unitId
-                + '/' + curReturnParcel.unitName + '/widget/unit.js?cb=' + cb
+                + '<script>document.write(\'<div class="' + curReturnParcel.xSlotRef.unitName + '"></div>\');</script>'
+                + '<script>document.write(\'<script src="https://yummy.consumable.com/' + curReturnParcel.xSlotRef.unitId
+                + '/' + curReturnParcel.xSlotRef.unitName + '/widget/unit.js?cb=' + cb
                 + '" charset="utf-8" async></scr\'+\'ipt>\');</script>';
 
             /* The dealId if applicable for this slot. */
