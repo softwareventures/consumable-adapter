@@ -171,7 +171,7 @@ function ConsumableHtb(configs) {
                 time: System.now(),
                 user: {},
                 url: Browser.getPageUrl(),
-                referrer: document.referrer,
+                referrer: Browser.getReferrer(),
                 enableBotFiltering: true,
                 includePricingData: true,
                 parallel: true
