@@ -269,7 +269,7 @@ function ConsumableHtb(configs) {
             /* The creative/adm for the given slot that will be rendered if is the winner.
              * Please make sure the URL is decoded and ready to be document.written.
              */
-            var wrappedCreative = decision.contents && decision.contents[0] && decision.contents[0].body || "";
+            var wrappedCreative = (decision.contents && decision.contents[0] && decision.contents[0].body) || '';
             var cb = System.now();
             var bidCreative = '<script>'
                 + 'document.write(\'<div id=\"' + curReturnParcel.xSlotRef.unitName + '-' + curReturnParcel.xSlotRef.unitId + '\">\');</script>'
