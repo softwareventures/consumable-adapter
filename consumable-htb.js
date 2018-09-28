@@ -268,7 +268,8 @@ function ConsumableHtb(configs) {
             var wrappedCreative = (decision.contents && decision.contents[0] && decision.contents[0].body) || '';
             var cb = System.now();
             var bidCreative = '<script>'
-                + 'document.write(\'<div id="' + curReturnParcel.xSlotRef.unitName + '-' + curReturnParcel.xSlotRef.unitId + '">\');</script>'
+                + 'document.write(\'<div id="' + curReturnParcel.xSlotRef.unitName + '-'
+                + curReturnParcel.xSlotRef.unitId + '">\');</script>'
                 + wrappedCreative
                 + '<script>document.write(\'</div>\');</script>'
                 + '<script>document.write(\'<div class="' + curReturnParcel.xSlotRef.unitName + '"></div>\');</script>'
