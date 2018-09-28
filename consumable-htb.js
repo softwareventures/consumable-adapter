@@ -12,9 +12,7 @@ var Size = require('size.js');
 var SpaceCamp = require('space-camp.js');
 var System = require('system.js');
 var Network = require('network.js');
-var Utilities = require('utilities.js');
 
-var ComplianceService;
 var RenderService;
 
 //? if (DEBUG) {
@@ -154,8 +152,6 @@ function ConsumableHtb(configs) {
          * returned from gdpr.getConsent() are safe defaults and no attempt has been
          * made by the wrapper to contact a Consent Management Platform.
          */
-        //var gdprStatus = ComplianceService.gdpr.getConsent();
-        var privacyEnabled = ComplianceService.isPrivacyEnabled();
 
         return {
             url: Browser.getProtocol() + '//e.serverbid.com/api/v2',
@@ -369,7 +365,6 @@ function ConsumableHtb(configs) {
      * ---------------------------------- */
 
     (function __constructor() {
-        ComplianceService = SpaceCamp.services.ComplianceService;
         RenderService = SpaceCamp.services.RenderService;
 
         /* =============================================================================
