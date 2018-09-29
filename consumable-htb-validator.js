@@ -41,6 +41,13 @@ function partnerValidator(configs) {
                                 type: 'string',
                                 minLength: 1
                             },
+                            zoneIds: {
+                                type: 'array',
+                                optional: true,
+                                items: {
+                                    type: 'number'
+                                }
+                            },
                             unitId: {
                                 type: 'string',
                                 minLength: 1
