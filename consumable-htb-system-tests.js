@@ -49,8 +49,9 @@ function getConfig() {
 }
 
 function validateBidRequest(request) {
-    // TODO
-    expect(request).toBeDefined();
+    expect(request.host).toBe('e.serverbid.com');
+    expect(request.pathname).toBe('/api/v2');
+    expect(Object.keys(request.query).length).toBe(0);
 }
 
 module.exports = {
