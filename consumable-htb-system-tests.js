@@ -34,6 +34,15 @@ function getConfig() {
                 unitId: '4508',
                 unitName: 'cnsmbl-audio-320x50-slider',
                 adTypes: [23]
+            },
+            2: {
+                networkId: '9969',
+                groupId: '8307.5',
+                siteId: '1029010',
+                zoneIds: [187327],
+                unitId: '4508',
+                unitName: 'cnsmbl-audio-320x50-slider',
+                adTypes: [23]
             }
         }
     };
