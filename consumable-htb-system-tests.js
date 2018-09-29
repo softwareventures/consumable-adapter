@@ -54,6 +54,43 @@ function validateBidRequest(request) {
     expect(Object.keys(request.query).length).toBe(0);
 }
 
+function getValidResponse(request, creative) {
+    return {
+        user: {
+            key: 'ad39231daeb043f2a9610414f08394b5'
+        },
+        decisions: [
+            {
+                1: {
+                    adId: 1234,
+                    creativeId: 2345,
+                    flightId: 3456,
+                    campaignId: 4567,
+                    clickUrl: 'http://example.org/click',
+                    impressionUrl: 'http://example.org/impression',
+                    contents: [
+                        {
+                            type: 'html',
+                            body: creative
+                        }
+                    ],
+                    height: 250,
+                    width: 300,
+                    events: [],
+                    pricing: {
+                        price: 0,
+                        clearPrice: 0.3238704,
+                        revenue: 0.0003238704,
+                        rateType: 2,
+                        eCPM: 0
+                    }
+                },
+                2: null
+            }
+        ]
+    };
+}
+
 module.exports = {
     getPartnerId: getPartnerId,
     getStatsId: getStatsId,
@@ -61,5 +98,6 @@ module.exports = {
     getCallbackType: getCallbackType,
     getArchitecture: getArchitecture,
     getConfig: getConfig,
-    validateBidRequest: validateBidRequest
+    validateBidRequest: validateBidRequest,
+    getValidResponse: getValidResponse
 };
