@@ -39,11 +39,17 @@ function getConfig() {
     };
 }
 
+function validateBidRequest(request) {
+    // TODO
+    expect(request).toBeDefined();
+}
+
 module.exports = {
     getPartnerId: getPartnerId,
     getStatsId: getStatsId,
     getBidRequestRegex: getBidRequestRegex,
     getCallbackType: getCallbackType,
     getArchitecture: getArchitecture,
-    getConfig: getConfig
+    getConfig: getConfig,
+    validateBidRequest: validateBidRequest
 };
