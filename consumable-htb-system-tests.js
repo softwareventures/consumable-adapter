@@ -23,10 +23,27 @@ function getArchitecture() {
     return 'SRA';
 }
 
+function getConfig() {
+    return {
+        xSlots: {
+            1: {
+                networkId: '9969',
+                groupId: '8307.5',
+                siteId: '1029010',
+                zoneIds: [187327],
+                unitId: '4508',
+                unitName: 'cnsmbl-audio-320x50-slider',
+                adTypes: [23]
+            }
+        }
+    };
+}
+
 module.exports = {
     getPartnerId: getPartnerId,
     getStatsId: getStatsId,
     getBidRequestRegex: getBidRequestRegex,
     getCallbackType: getCallbackType,
-    getArchitecture: getArchitecture
+    getArchitecture: getArchitecture,
+    getConfig: getConfig
 };
