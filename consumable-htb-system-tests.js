@@ -11,7 +11,7 @@ function getStatsId() {
 function getBidRequestRegex() {
     return {
         method: 'POST',
-        urlRegex: /^https?:\/\/e.serverbid.com\/api\//
+        urlRegex: /^https?:\/\/e\.serverbid\.com\/api\//
     };
 }
 
