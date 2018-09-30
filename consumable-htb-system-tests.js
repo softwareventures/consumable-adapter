@@ -51,7 +51,7 @@ function getConfig() {
 function validateBidRequest(request) {
     expect(request.host).toBe('e.serverbid.com');
     expect(request.pathname).toBe('/api/v2');
-    expect(Object.keys(request.query).length).toBe(0);
+    expect(request.query).toEqual({});
 }
 
 function getValidResponse(request, creative) {
