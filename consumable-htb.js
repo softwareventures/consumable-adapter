@@ -268,7 +268,9 @@ function ConsumableHtb(configs) {
              */
             var wrappedCreative = (decision.contents && decision.contents[0] && decision.contents[0].body) || '';
             var cb = System.now();
-            var bidCreative = '<div id="' + curReturnParcel.xSlotRef.unitName + '-'
+            var bidCreative = '<iframe width="0" height="0" style="display:none;visibility:hidden" '
+                + 'src="https://t-9969.adzerk.net/9969/i.html"></iframe>'
+                + '<div id="' + curReturnParcel.xSlotRef.unitName + '-'
                 + curReturnParcel.xSlotRef.unitId + '">'
                 + wrappedCreative
                 + '</div>'
