@@ -117,6 +117,13 @@ function getPixelRequestRegex() {
     };
 }
 
+function validatePixelRequests(requests) {
+    expect(requests.length).toBe(1);
+    expect(requests[0].host).toBe('example.org');
+    expect(requests[0].pathname).toBe('/impression');
+    expect(requests[0].query).toEqual(jasmine.arrayWithExactContents([]));
+}
+
 module.exports = {
     getPartnerId: getPartnerId,
     getStatsId: getStatsId,
@@ -128,5 +135,6 @@ module.exports = {
     getValidResponse: getValidResponse,
     validateTargeting: validateTargeting,
     getPassResponse: getPassResponse,
-    getPixelRequestRegex: getPixelRequestRegex
+    getPixelRequestRegex: getPixelRequestRegex,
+    validatePixelRequests: validatePixelRequests
 };
