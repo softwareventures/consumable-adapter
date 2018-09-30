@@ -96,6 +96,18 @@ function validateTargeting(targetingMap) {
     }));
 }
 
+function getPassResponse() {
+    return JSON.stringify({
+        user: {
+            key: 'ad39231daeb043f2a9610414f08394b5'
+        },
+        decisions: {
+            1: null,
+            2: null
+        }
+    });
+}
+
 module.exports = {
     getPartnerId: getPartnerId,
     getStatsId: getStatsId,
@@ -105,5 +117,6 @@ module.exports = {
     getConfig: getConfig,
     validateBidRequest: validateBidRequest,
     getValidResponse: getValidResponse,
-    validateTargeting: validateTargeting
+    validateTargeting: validateTargeting,
+    getPassResponse: getPassResponse
 };
