@@ -33,7 +33,8 @@ function getConfig() {
                 zoneIds: [187327],
                 unitId: '4508',
                 unitName: 'cnsmbl-audio-320x50-slider',
-                adTypes: [23]
+                adTypes: [23],
+                size: [320, 50]
             },
             2: {
                 networkId: '9969',
@@ -42,7 +43,8 @@ function getConfig() {
                 zoneIds: [187327],
                 unitId: '4508',
                 unitName: 'cnsmbl-audio-320x50-slider',
-                adTypes: [23]
+                adTypes: [23],
+                size: [320, 50]
             }
         }
     };

@@ -62,6 +62,13 @@ function partnerValidator(configs) {
                                 items: {
                                     type: 'number'
                                 }
+                            },
+                            size: {
+                                type: 'array',
+                                exactLength: 2,
+                                items: {
+                                    type: 'number'
+                                }
                             }
                         }
                     }

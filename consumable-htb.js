@@ -261,7 +261,7 @@ function ConsumableHtb(configs) {
                 * parseFloat(curReturnParcel.xSlotRef.networkId) / parseFloat(curReturnParcel.xSlotRef.groupId);
 
             /* The size of the given slot */
-            var bidSize = [Number(decision.width), Number(decision.height)];
+            var bidSize = curReturnParcel.xSlotRef.size;
 
             /* The creative/adm for the given slot that will be rendered if is the winner.
              * Please make sure the URL is decoded and ready to be document.written.
