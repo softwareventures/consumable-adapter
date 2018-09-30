@@ -73,8 +73,8 @@ function getValidResponse(request, creative) {
                         body: creative
                     }
                 ],
-                height: 250,
-                width: 300,
+                height: 50,
+                width: 320,
                 events: [],
                 pricing: {
                     price: 0,
@@ -97,8 +97,8 @@ function getValidResponse(request, creative) {
                         body: creative
                     }
                 ],
-                height: 250,
-                width: 300,
+                height: 50,
+                width: 320,
                 events: [],
                 pricing: {
                     price: 0,
@@ -115,7 +115,7 @@ function getValidResponse(request, creative) {
 function validateTargeting(targetingMap) {
     expect(targetingMap).toEqual(jasmine.objectContaining({
         ix_cnsm_id: jasmine.arrayWithExactContents([jasmine.any(String), jasmine.any(String)]),
-        ix_cnsm_cpm: jasmine.arrayWithExactContents(['300x250_35', '300x250_35'])
+        ix_cnsm_cpm: jasmine.arrayWithExactContents(['320x50_35', '320x50_35'])
     }));
 }
 
