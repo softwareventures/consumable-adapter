@@ -108,6 +108,15 @@ function getPassResponse() {
     });
 }
 
+function getPixelRequestRegex() {
+    return {
+        pixel: {
+            method: 'GET',
+            urlRegex: /^http:\/\/example\.org\/impression$/
+        }
+    };
+}
+
 module.exports = {
     getPartnerId: getPartnerId,
     getStatsId: getStatsId,
@@ -118,5 +127,6 @@ module.exports = {
     validateBidRequest: validateBidRequest,
     getValidResponse: getValidResponse,
     validateTargeting: validateTargeting,
-    getPassResponse: getPassResponse
+    getPassResponse: getPassResponse,
+    getPixelRequestRegex: getPixelRequestRegex
 };
