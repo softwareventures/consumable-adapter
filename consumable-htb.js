@@ -268,15 +268,13 @@ function ConsumableHtb(configs) {
              */
             var wrappedCreative = (decision.contents && decision.contents[0] && decision.contents[0].body) || '';
             var cb = System.now();
-            var bidCreative = '<script>'
-                + 'document.write(\'<div id="' + curReturnParcel.xSlotRef.unitName + '-'
-                + curReturnParcel.xSlotRef.unitId + '">\');</script>'
+            var bidCreative = '<div id="' + curReturnParcel.xSlotRef.unitName + '-'
+                + curReturnParcel.xSlotRef.unitId + '">'
                 + wrappedCreative
-                + '<script>document.write(\'</div>\');</script>'
-                + '<script>document.write(\'<div class="' + curReturnParcel.xSlotRef.unitName + '"></div>\');</script>'
-                + '<script>document.write(\'<script src="https://yummy.consumable.com/' + curReturnParcel.xSlotRef.unitId
-                + '/' + curReturnParcel.xSlotRef.unitName + '/widget/unit.js?cb=' + cb
-                + '" charset="utf-8" async></scr\'+\'ipt>\');</script>';
+                + '</div>'
+                + '<div class="' + curReturnParcel.xSlotRef.unitName + '"></div>'
+                + '<script src="https://yummy.consumable.com/' + curReturnParcel.xSlotRef.unitId
+                + '/' + curReturnParcel.xSlotName.unitName + '/widget/unit.js?cb=' + cb + '" async></script>';
 
             /* The dealId if applicable for this slot. */
             var bidDealId = '';
