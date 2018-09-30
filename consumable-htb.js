@@ -197,7 +197,7 @@ function ConsumableHtb(configs) {
     function __renderPixel(pixelUrl) {
         if (pixelUrl) {
             Network.img({
-                url: decodeURIComponent(pixelUrl),
+                url: pixelUrl,
                 method: 'GET'
             });
         }
