@@ -84,15 +84,38 @@ function getValidResponse(request, creative) {
                     eCPM: 0
                 }
             },
-            2: null
+            2: {
+                adId: 1234,
+                creativeId: 2345,
+                flightId: 3456,
+                campaignId: 4567,
+                clickUrl: 'http://example.org/click',
+                impressionUrl: 'http://example.org/impression',
+                contents: [
+                    {
+                        type: 'html',
+                        body: creative
+                    }
+                ],
+                height: 250,
+                width: 300,
+                events: [],
+                pricing: {
+                    price: 0,
+                    clearPrice: 0.3238704,
+                    revenue: 0.0003238704,
+                    rateType: 2,
+                    eCPM: 0
+                }
+            }
         }
     });
 }
 
 function validateTargeting(targetingMap) {
     expect(targetingMap).toEqual(jasmine.objectContaining({
-        ix_cnsm_id: jasmine.arrayWithExactContents([jasmine.any(String)]),
-        ix_cnsm_cpm: jasmine.arrayWithExactContents(['300x250_35'])
+        ix_cnsm_id: jasmine.arrayWithExactContents([jasmine.any(String), jasmine.any(String)]),
+        ix_cnsm_cpm: jasmine.arrayWithExactContents(['300x250_35', '300x250_35'])
     }));
 }
 
