@@ -2,68 +2,114 @@
 ## General Compatibility
 |Feature|  |
 |---|---|
-| Consent |  |
-| Native Ad Support |  |
-| SafeFrame Support |  |
-| PMP Support | |
+| Consent | No |
+| Native Ad Support | Yes |
+| SafeFrame Support | Yes |
+| PMP Support | No |
  
 ## Browser Compatibility
 | Browser |  |
 |--- |---|
-| Chrome |  |
-| Edge |  |
-| Firefox |  |
-| Internet Explorer 9 |  |
-| Internet Explorer 10 |  |
-| Internet Explorer 11 |  |
-| Safari |  |
-| Mobile Chrome | |
-| Mobile Safari | |
-| UC Browser | |
-| Samsung Internet | |
-| Opera | |
+| Chrome | Yes |
+| Edge | Yes |
+| Firefox | Yes |
+| Internet Explorer 9 | Yes |
+| Internet Explorer 10 | Yes |
+| Internet Explorer 11 | Yes |
+| Safari | Yes |
+| Mobile Chrome | Yes |
+| Mobile Safari | Yes |
+| UC Browser | No |
+| Samsung Internet | No |
+| Opera | Yes |
  
 ## Adapter Information
 | Info | |
 |---|---|
 | Partner Id | ConsumableHtb |
-| Ad Server Responds in (Cents, Dollars, etc) | |
-| Bid Type (Gross / Net) | |
-| GAM Key (Open Market) | |
-| GAM Key (Private Market) | |
-| Ad Server URLs | |
-| Slot Mapping Sytle (Size / Multiple Sizes / Slot) | |
-| Request Architecture (MRA / SRA) | |
+| Ad Server Responds in (Cents, Dollars, etc) | Dollars |
+| Bid Type (Gross / Net) | Net |
+| GAM Key (Open Market) | ? |
+| GAM Key (Private Market) | ? |
+| Ad Server URLs | serverbid.com |
+| Slot Mapping Sytle (Size / Multiple Sizes / Slot) | Multiple Sizes |
+| Request Architecture (MRA / SRA) | SRA |
  
 ## Currencies Supported
+USD $
  
 ## Bid Request Information
 ### Parameters
 | Key | Required | Type | Description |
 |---|---|---|---|
-| | | | |
+| unitId | Yes | Integer | |
+| unitName | Yes | Integer | |
+| siteId | Yes | Integer | |
+| networkId | Yes | Integer | |
+| zoneIds | Yes | Array   | |
  
 ### Example
-```javascript
- 
-```
+{  
+   "placements":[  
+      {  
+         "divName":"28cbf8f87b7d5",
+         "adTypes":[5],
+         "siteId":"1035514",
+         "networkId":"9969",
+         "zoneIds":[188825]
+      }
+   ],
+   "time":1538599207715,
+   "user":{  
+
+   },
+   "url":"http://domain.com/",
+   "referrer":"http://domain.com/index.html",
+   "enableBotFiltering":true,
+   "includePricingData":true,
+   "parallel":true  
+}
+
  
 ## Bid Response Information
 ### Bid Example
-```javascript
- 
-```
+{  
+   "decisions":{  
+      "2e53ecd4a29b06":{  
+         "adId":-7176956978374674467,
+         "impressionUrl":"https://e.serverbid.com/i/?i=ARAAAAAAAAAAcP...",
+         "contents":[  
+            {  
+               "body":"<script src=\"https://nym1-ib.adnxs.com/ab?e=wqT..."></script>",
+               "data":null,
+               "type":"rtb"
+            }
+         ],
+         "height":250,
+         "width":300,
+         "pricing":{  
+            "clearPrice":0.3075,
+            "eCPM":0.0,
+            "price":0.0,
+            "rateType":2,
+            "revenue":0.0
+         }
+      }
+   }
+}
+
 ### Pass Example
-```javascript
- 
-```
+  ???? Not sure
  
 ## Configuration Information
 ### Configuration Keys
 | Key | Required | Type | Description |
 |---|---|---|---|
-| | | | |
+| unitId | Yes | Integer | |
+| unitName | Yes | Integer | |
+| siteId | Yes | Integer | |
+| networkId | Yes | Integer | |
+| zoneIds | Yes | Array   | |
+
 ### Example
-```javascript
- 
-```
+Not sure how this is different than the bid request parameters.
