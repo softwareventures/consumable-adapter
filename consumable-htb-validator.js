@@ -33,10 +33,6 @@ function partnerValidator(configs) {
                                 type: 'string',
                                 minLength: 1
                             },
-                            groupId: {
-                                type: 'string',
-                                minLength: 1
-                            },
                             siteId: {
                                 type: 'string',
                                 minLength: 1

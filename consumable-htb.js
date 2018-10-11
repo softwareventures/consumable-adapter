@@ -257,8 +257,7 @@ function ConsumableHtb(configs) {
             }
 
             /* The bid price for the given slot */
-            var bidPrice = decision.pricing && Number(decision.pricing.clearPrice)
-                * parseFloat(curReturnParcel.xSlotRef.networkId) / parseFloat(curReturnParcel.xSlotRef.groupId);
+            var bidPrice = (decision.pricing && Number(decision.pricing.clearPrice)) || 0;
 
             /* The size of the given slot */
             var bidSize = curReturnParcel.xSlotRef.size;

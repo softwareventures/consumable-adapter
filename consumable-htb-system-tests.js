@@ -28,7 +28,6 @@ function getConfig() {
         xSlots: {
             1: {
                 networkId: '9969',
-                groupId: '8307.5',
                 siteId: '1029010',
                 zoneIds: [187327],
                 unitId: '4508',
@@ -38,7 +37,6 @@ function getConfig() {
             },
             2: {
                 networkId: '9969',
-                groupId: '8307.5',
                 siteId: '1029010',
                 zoneIds: [187327],
                 unitId: '4508',
