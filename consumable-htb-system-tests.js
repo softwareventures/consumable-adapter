@@ -78,8 +78,8 @@ function getValidResponse(request, creative) {
                 events: [],
                 pricing: {
                     price: 0,
-                    clearPrice: 0.3238704,
-                    revenue: 0.0003238704,
+                    clearPrice: 2,
+                    revenue: 0.002,
                     rateType: 2,
                     eCPM: 0
                 }
@@ -102,8 +102,8 @@ function getValidResponse(request, creative) {
                 events: [],
                 pricing: {
                     price: 0,
-                    clearPrice: 0.3238704,
-                    revenue: 0.0003238704,
+                    clearPrice: 2,
+                    revenue: 0.002,
                     rateType: 2,
                     eCPM: 0
                 }
@@ -115,7 +115,7 @@ function getValidResponse(request, creative) {
 function validateTargeting(targetingMap) {
     expect(targetingMap).toEqual(jasmine.objectContaining({
         ix_cnsm_id: jasmine.arrayWithExactContents([jasmine.any(String), jasmine.any(String)]),
-        ix_cnsm_cpm: jasmine.arrayWithExactContents(['320x50_35', '320x50_35'])
+        ix_cnsm_cpm: jasmine.arrayWithExactContents(['320x50_200', '320x50_200'])
     }));
 }
 
