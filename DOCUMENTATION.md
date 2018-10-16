@@ -103,7 +103,16 @@ USD $
 ```
 
 ### Pass Example
-  ???? Not sure
+```json
+{
+    "user": {
+        "key": "ad39231daeb043f2a9610414f08394b5"
+    },
+    "decisions": {
+        "2e53ecd4a29b06": null
+    }
+}
+```
  
 ## Configuration Information
 ### Configuration Keys
