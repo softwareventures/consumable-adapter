@@ -83,7 +83,7 @@ USD $
          "impressionUrl":"https://e.serverbid.com/i/?i=ARAAAAAAAAAAcP...",
          "contents":[  
             {  
-               "body":"<script src=\"https://nym1-ib.adnxs.com/ab?e=wqT..."></script>",
+               "body":"<script src=\"https://nym1-ib.adnxs.com/ab?e=wqT...\"></script>",
                "data":null,
                "type":"rtb"
             }
