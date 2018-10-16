@@ -29,9 +29,42 @@ function partnerValidator(configs) {
                     '*': {
                         type: 'object',
                         properties: {
-                            placementId: {
+                            networkId: {
                                 type: 'string',
                                 minLength: 1
+                            },
+                            siteId: {
+                                type: 'string',
+                                minLength: 1
+                            },
+                            zoneIds: {
+                                type: 'array',
+                                optional: true,
+                                items: {
+                                    type: 'number'
+                                }
+                            },
+                            unitId: {
+                                type: 'string',
+                                minLength: 1
+                            },
+                            unitName: {
+                                type: 'string',
+                                minLength: 1
+                            },
+                            adTypes: {
+                                type: 'array',
+                                optional: true,
+                                items: {
+                                    type: 'number'
+                                }
+                            },
+                            size: {
+                                type: 'array',
+                                exactLength: 2,
+                                items: {
+                                    type: 'number'
+                                }
                             }
                         }
                     }

@@ -12,9 +12,7 @@ var Size = require('size.js');
 var SpaceCamp = require('space-camp.js');
 var System = require('system.js');
 var Network = require('network.js');
-var Utilities = require('utilities.js');
 
-var ComplianceService;
 var RenderService;
 
 //? if (DEBUG) {
@@ -128,12 +126,7 @@ function ConsumableHtb(configs) {
          * }
          */
 
-        /* ---------------------- PUT CODE HERE ------------------------------------ */
-        var queryObj = {};
         var callbackId = System.generateUniqueId();
-
-        /* Change this to your bidder endpoint. */
-        var baseUrl = Browser.getProtocol() + '//someAdapterEndpoint.com/bid';
 
         /* ------------------------ Get consent information -------------------------
          * If you want to implement GDPR consent in your adapter, use the function
@@ -159,40 +152,34 @@ function ConsumableHtb(configs) {
          * returned from gdpr.getConsent() are safe defaults and no attempt has been
          * made by the wrapper to contact a Consent Management Platform.
          */
-        var gdprStatus = ComplianceService.gdpr.getConsent();
-        var privacyEnabled = ComplianceService.isPrivacyEnabled();
-
-        /* ---------------- Craft bid request using the above returnParcels --------- */
-
-        /* ------- Put GDPR consent code here if you are implementing GDPR ---------- */
-
-        /* -------------------------------------------------------------------------- */
 
         return {
-            url: baseUrl,
-            data: queryObj,
-            callbackId: callbackId
+            url: Browser.getProtocol() + '//e.serverbid.com/api/v2',
+            data: {
+                placements: returnParcels.map(function (parcel) {
+                    return {
+                        networkId: parcel.xSlotRef.networkId,
+                        siteId: parcel.xSlotRef.siteId,
+                        zoneIds: parcel.xSlotRef.zoneIds,
+                        divName: parcel.xSlotName,
+                        adTypes: parcel.xSlotRef.adTypes
+                    };
+                }),
+                time: System.now(),
+                user: {},
+                url: Browser.getPageUrl(),
+                referrer: Browser.getReferrer(),
+                enableBotFiltering: true,
+                includePricingData: true,
+                parallel: true
+            },
+            callbackId: callbackId,
+            networkParamOverrides: {
+                method: 'POST',
+                contentType: 'application/json'
+            }
         };
     }
-
-    /* =============================================================================
-     * STEP 3  | Response callback
-     * -----------------------------------------------------------------------------
-     *
-     * This generator is only necessary if the partner's endpoint has the ability
-     * to return an arbitrary ID that is sent to it. It should retrieve that ID from
-     * the response and save the response to adResponseStore keyed by that ID.
-     *
-     * If the endpoint does not have an appropriate field for this, set the profile's
-     * callback type to CallbackTypes.CALLBACK_NAME and omit this function.
-     */
-    function adResponseCallback(adResponse) {
-        /* Get callbackId from adResponse here */
-        var callbackId = 0;
-        __baseClass._adResponseStore[callbackId] = adResponse;
-    }
-
-    /* -------------------------------------------------------------------------- */
 
     /* Helpers
      * ---------------------------------- */
@@ -210,7 +197,7 @@ function ConsumableHtb(configs) {
     function __renderPixel(pixelUrl) {
         if (pixelUrl) {
             Network.img({
-                url: decodeURIComponent(pixelUrl),
+                url: pixelUrl,
                 method: 'GET'
             });
         }
@@ -249,12 +236,6 @@ function ConsumableHtb(configs) {
          *
          */
 
-        /* ---------- Process adResponse and extract the bids into the bids array ------------ */
-
-        var bids = adResponse;
-
-        /* --------------------------------------------------------------------------------- */
-
         for (var j = 0; j < returnParcels.length; j++) {
             var curReturnParcel = returnParcels[j];
 
@@ -263,27 +244,10 @@ function ConsumableHtb(configs) {
             headerStatsInfo[htSlotId] = {};
             headerStatsInfo[htSlotId][curReturnParcel.requestId] = [curReturnParcel.xSlotName];
 
-            var curBid;
+            var decision = adResponse.decisions && adResponse.decisions[curReturnParcel.xSlotName];
 
-            for (var i = 0; i < bids.length; i++) {
-                /**
-                 * This section maps internal returnParcels and demand returned from the bid request.
-                 * In order to match them correctly, they must be matched via some criteria. This
-                 * is usually some sort of placements or inventory codes. Please replace the someCriteria
-                 * key to a key that represents the placement in the configuration and in the bid responses.
-                 */
-
-                /* ----------- Fill this out to find a matching bid for the current parcel ------------- */
-                if (curReturnParcel.xSlotRef.someCriteria === bids[i].someCriteria) {
-                    curBid = bids[i];
-                    bids.splice(i, 1);
-
-                    break;
-                }
-            }
-
-            /* No matching bid found so its a pass */
-            if (!curBid) {
+            if (!decision) {
+                /* No matching bid found so its a pass */
                 if (__profile.enabledAnalytics.requestTime) {
                     __baseClass._emitStatsEvent(sessionId, 'hs_slot_pass', headerStatsInfo);
                 }
@@ -292,24 +256,29 @@ function ConsumableHtb(configs) {
                 continue;
             }
 
-            /* ---------- Fill the bid variables with data from the bid response here. ------------ */
-
-            /* Using the above variable, curBid, extract various information about the bid and assign it to
-             * these local variables */
-
             /* The bid price for the given slot */
-            var bidPrice = curBid.price;
+            var bidPrice = (decision.pricing && Number(decision.pricing.clearPrice)) || 0;
 
             /* The size of the given slot */
-            var bidSize = [Number(curBid.width), Number(curBid.height)];
+            var bidSize = curReturnParcel.xSlotRef.size;
 
             /* The creative/adm for the given slot that will be rendered if is the winner.
              * Please make sure the URL is decoded and ready to be document.written.
              */
-            var bidCreative = curBid.adm;
+            var wrappedCreative = (decision.contents && decision.contents[0] && decision.contents[0].body) || '';
+            var cb = System.now();
+            var bidCreative = '<iframe width="0" height="0" style="display:none;visibility:hidden" '
+                + 'src="https://t-9969.adzerk.net/9969/i.html"></iframe>'
+                + '<div id="' + curReturnParcel.xSlotRef.unitName + '-'
+                + curReturnParcel.xSlotRef.unitId + '">'
+                + wrappedCreative
+                + '</div>'
+                + '<div class="' + curReturnParcel.xSlotRef.unitName + '"></div>'
+                + '<script src="https://yummy.consumable.com/' + curReturnParcel.xSlotRef.unitId
+                + '/' + curReturnParcel.xSlotName.unitName + '/widget/unit.js?cb=' + cb + '" async></script>';
 
             /* The dealId if applicable for this slot. */
-            var bidDealId = curBid.dealid;
+            var bidDealId = '';
 
             /* Explicitly pass */
             var bidIsPass = bidPrice <= 0;
@@ -318,11 +287,10 @@ function ConsumableHtb(configs) {
             * If firing a tracking pixel is not required or the pixel url is part of the adm,
             * leave empty;
             */
-            var pixelUrl = '';
+            var pixelUrl = decision.impressionUrl || '';
 
             /* --------------------------------------------------------------------------------------- */
 
-            curBid = null;
             if (bidIsPass) {
                 //? if (DEBUG) {
                 Scribe.info(__profile.partnerId + ' returned pass for { id: ' + adResponse.id + ' }.');
@@ -398,7 +366,6 @@ function ConsumableHtb(configs) {
      * ---------------------------------- */
 
     (function __constructor() {
-        ComplianceService = SpaceCamp.services.ComplianceService;
         RenderService = SpaceCamp.services.RenderService;
 
         /* =============================================================================
@@ -437,12 +404,11 @@ function ConsumableHtb(configs) {
                 pmid: 'ix_cnsm_dealid'
             },
 
-            /* The bid price unit (in cents) the endpoint returns, please refer to the readme for details */
-            bidUnitInCents: 1,
+            bidUnitInCents: 100,
             lineItemType: Constants.LineItemTypes.ID_AND_SIZE,
-            callbackType: Partner.CallbackTypes.ID,
+            callbackType: Partner.CallbackTypes.NONE,
             architecture: Partner.Architectures.SRA,
-            requestType: Partner.RequestTypes.ANY
+            requestType: Partner.RequestTypes.AJAX
         };
 
         /* --------------------------------------------------------------------------------------- */
@@ -457,8 +423,7 @@ function ConsumableHtb(configs) {
 
         __baseClass = Partner(__profile, configs, null, {
             parseResponse: __parseResponse,
-            generateRequestObj: __generateRequestObj,
-            adResponseCallback: adResponseCallback
+            generateRequestObj: __generateRequestObj
         });
     })();
 
@@ -490,8 +455,7 @@ function ConsumableHtb(configs) {
 
         //? if (TEST) {
         parseResponse: __parseResponse,
-        generateRequestObj: __generateRequestObj,
-        adResponseCallback: adResponseCallback
+        generateRequestObj: __generateRequestObj
         //? }
     };
 
