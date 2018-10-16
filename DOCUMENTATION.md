@@ -118,11 +118,13 @@ USD $
 ### Configuration Keys
 | Key | Required | Type | Description |
 |---|---|---|---|
-| unitId | Yes | Integer | |
-| unitName | Yes | Integer | |
-| siteId | Yes | Integer | |
-| networkId | Yes | Integer | |
-| zoneIds | Yes | Array   | |
+| networkId | Yes | String | Network ID |
+| siteId | Yes | String | Site ID |
+| zoneIds | Yes | Array\<Integer\> | Zone IDs |
+| unitId | Yes | String | Unit ID |
+| unitName | Yes | String | Unit Name |
+| adTypes | No | Array\<Integer\> | Ad Types |
+| size | Yes | \[Integer, Integer\] | Size of the ad in pixels (\[width, height\]) |
 
 ### Example
 Not sure how this is different than the bid request parameters.
