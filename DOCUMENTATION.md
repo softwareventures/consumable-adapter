@@ -29,8 +29,8 @@
 | Partner Id | ConsumableHtb |
 | Ad Server Responds in (Cents, Dollars, etc) | Dollars |
 | Bid Type (Gross / Net) | Net |
-| GAM Key (Open Market) | ? |
-| GAM Key (Private Market) | ? |
+| GAM Key (Open Market) | ix_cnsm_id |
+| GAM Key (Private Market) | ix_cnsm_dealid |
 | Ad Server URLs | serverbid.com |
 | Slot Mapping Sytle (Size / Multiple Sizes / Slot) | Multiple Sizes |
 | Request Architecture (MRA / SRA) | SRA |
