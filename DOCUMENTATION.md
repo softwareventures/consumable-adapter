@@ -49,6 +49,7 @@ USD $
 | zoneIds | Yes | Array   | |
  
 ### Example
+```json
 {  
    "placements":[  
       {  
@@ -69,10 +70,12 @@ USD $
    "includePricingData":true,
    "parallel":true  
 }
+```
 
  
 ## Bid Response Information
 ### Bid Example
+```json
 {  
    "decisions":{  
       "2e53ecd4a29b06":{  
@@ -97,6 +100,7 @@ USD $
       }
    }
 }
+```
 
 ### Pass Example
   ???? Not sure
