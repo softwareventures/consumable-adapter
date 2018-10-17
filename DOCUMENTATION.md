@@ -13,7 +13,7 @@
 | Chrome | Yes |
 | Edge | Yes |
 | Firefox | Yes |
-| Internet Explorer 9 | Yes |
+| Internet Explorer 9 | No |
 | Internet Explorer 10 | Yes |
 | Internet Explorer 11 | Yes |
 | Safari | Yes |
