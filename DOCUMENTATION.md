@@ -32,7 +32,7 @@
 | GAM Key (Open Market) | ix_cnsm_id |
 | GAM Key (Private Market) | ix_cnsm_dealid |
 | Ad Server URLs | serverbid.com |
-| Slot Mapping Sytle (Size / Multiple Sizes / Slot) | Multiple Sizes |
+| Slot Mapping Style (Size / Multiple Sizes / Slot) | Size |
 | Request Architecture (MRA / SRA) | SRA |
  
 ## Currencies Supported
