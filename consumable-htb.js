@@ -275,7 +275,7 @@ function ConsumableHtb(configs) {
                 + '</div>'
                 + '<div class="' + curReturnParcel.xSlotRef.unitName + '"></div>'
                 + '<script src="https://yummy.consumable.com/' + curReturnParcel.xSlotRef.unitId
-                + '/' + curReturnParcel.xSlotName.unitName + '/widget/unit.js?cb=' + cb + '" async></script>';
+                + '/' + curReturnParcel.xSlotRef.unitName + '/widget/unit.js?cb=' + cb + '" async></script>';
 
             /* The dealId if applicable for this slot. */
             var bidDealId = '';
