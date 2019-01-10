@@ -60,6 +60,52 @@ function ConsumableHtb(configs) {
     /* Utilities
      * ---------------------------------- */
 
+    var adTypesBySize = {
+        '120x90': 1,
+        '468x60': 3,
+        '728x90': 4,
+        '300x250': 5,
+        '160x600': 6,
+        '120x600': 7,
+        '300x100': 8,
+        '180x150': 9,
+        '336x280': 10,
+        '240x400': 11,
+        '234x60': 12,
+        '88x31': 13,
+        '120x60': 14,
+        '120x240': 15,
+        '125x125': 16,
+        '220x250': 17,
+        '250x250': 18,
+        '250x90': 19,
+        '0x0': 20,
+        '200x90': 21,
+        '300x50': 22,
+        '320x50': 23,
+        '320x480': 24,
+        '185x185': 25,
+        '620x45': 26,
+        '300x125': 27,
+        '800x250': 28,
+        '300x600': 43,
+        '970x90': 77,
+        '970x250': 123,
+        '970x66': 286,
+        '320x250': 331,
+        '700x500': 374,
+        '486x60': 429,
+        '300x1050': 934,
+        '320x100': 1578,
+        '728x250': 2730,
+        '970x280': 3230,
+        '320x267': 3301
+    };
+
+    function sizeToAdType(size) {
+        return adTypesBySize[Size.arrayToString(size)];
+    }
+
     /**
      * Generates the request URL and query data to the endpoint for the xSlots
      * in the given returnParcels.
@@ -162,7 +208,11 @@ function ConsumableHtb(configs) {
                         siteId: parcel.xSlotRef.siteId,
                         zoneIds: parcel.xSlotRef.zoneIds,
                         divName: parcel.xSlotName,
-                        adTypes: parcel.xSlotRef.adTypes
+                        adTypes: parcel.xSlotRef.sizes
+                            .map(sizeToAdType)
+                            .filter(function (adType) {
+                                return typeof adType === 'number';
+                            })
                     };
                 }),
                 time: System.now(),

@@ -52,18 +52,14 @@ function partnerValidator(configs) {
                                 type: 'string',
                                 minLength: 1
                             },
-                            adTypes: {
+                            sizes: {
                                 type: 'array',
-                                optional: true,
                                 items: {
-                                    type: 'number'
-                                }
-                            },
-                            size: {
-                                type: 'array',
-                                exactLength: 2,
-                                items: {
-                                    type: 'number'
+                                    type: 'array',
+                                    exactLength: 2,
+                                    items: {
+                                        type: 'number'
+                                    }
                                 }
                             }
                         }
