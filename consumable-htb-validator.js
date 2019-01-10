@@ -54,6 +54,7 @@ function partnerValidator(configs) {
                             },
                             sizes: {
                                 type: 'array',
+                                minLength: 1,
                                 items: {
                                     type: 'array',
                                     exactLength: 2,
