@@ -123,8 +123,7 @@ USD $
 | zoneIds | Yes | Array\<Integer\> | Zone IDs |
 | unitId | Yes | String | Unit ID |
 | unitName | Yes | String | Unit Name |
-| adTypes | No | Array\<Integer\> | Ad Types |
-| size | Yes | \[Integer, Integer\] | Size of the ad in pixels (\[width, height\]) |
+| sizes | Yes | Array\<\[Integer, Integer\]\> | Possible sizes of the ad in pixels (\[width, height\]) |
 
 ### Example
 Not sure how this is different than the bid request parameters.
